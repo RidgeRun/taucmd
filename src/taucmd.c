@@ -1,5 +1,6 @@
 /* FLIR Tau 320 camera configuration and status utility
  * Copyright 2010 RidgeRun LLC
+ * Covered by BSD 2-Clause License
  */
 
 #include <stdio.h>

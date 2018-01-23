@@ -1,5 +1,6 @@
 /* tau-utils.h
  * Copyright 2010 RidgeRun LLC
+ * Covered by BSD 2-Clause License
  */
 
 #ifndef TAU_UTILS_H

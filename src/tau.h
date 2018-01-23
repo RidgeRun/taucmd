@@ -1,5 +1,6 @@
 /* libtau header file
  * Copyright 2010 RidgeRun LLC
+ * Covered by BSD 2-Clause License
  */
 
 #ifndef __TAU_H

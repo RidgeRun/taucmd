@@ -1,5 +1,6 @@
 /* libtau
  * Copyright 2010 RidgeRun LLC
+ * Covered by BSD 2-Clause License
  */
 #include <errno.h>
 #include <stdio.h>
