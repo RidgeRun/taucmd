@@ -53,7 +53,7 @@ extern int debug_level;
  * Public Functions
  ************************************************************************/
 
-/** Prints the contents of a buffer as human readable data in hexidecimal 
+/** Prints the contents of a buffer as human readable data in hexidecimal
  *  format.  Also prints an optional title string.
  * \param title string to print before printing buffer contents
  * \param data buffer holding data to print
@@ -65,10 +65,10 @@ void hexDump(const char *title, const void *data, const long data_count);
 /** Converts pairs of ASCII hex characters to binary stopping at end of
  *  string or when an illegal character is encountered with blanks
  *  being skipped
- * \param buffer holds the bytes of binary data as each pair of 
+ * \param buffer holds the bytes of binary data as each pair of
  *        ASCII hex characters are processed
  * \param buffer_len maximum number of bytes of ASCII data that can be
- *        stored           
+ *        stored
  * \param ascii_hex NULL terminated string of ASCII hex characters
  * \return number of bytes of binary data stored in buffer
  */

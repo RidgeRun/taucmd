@@ -79,9 +79,9 @@ static void show_usage(const char *progname, int e_help)
 
         fprintf(stderr, "-h                           Display this help information.\n");
         fprintf(stderr, "-H                           Display this help information along with list of all <commands>.\n");
-        fprintf(stderr, "-d <debug level>             Set the debug level.  Default is 0, off.  1 is enabled. 2 is verbose.\n"); 
+        fprintf(stderr, "-d <debug level>             Set the debug level.  Default is 0, off.  1 is enabled. 2 is verbose.\n");
         fprintf(stderr, "-f <device filename>         Exchange data with tau device over specified filename\n");
-        fprintf(stderr, "-n <IP:port>                 Exchange data with tau via a TCP connection to the specified IP address and port\n"); 
+        fprintf(stderr, "-n <IP:port>                 Exchange data with tau via a TCP connection to the specified IP address and port\n");
         fprintf(stderr, "<command>                    two digit hex number\n");
         fprintf(stderr, "<command parameters>         zero or more sets of two digit hex numbers\n");
 
@@ -103,7 +103,7 @@ static void show_usage(const char *progname, int e_help)
 }
 
 
-/** Parses command line options, setting application global variables 
+/** Parses command line options, setting application global variables
  * holding user specified preferences.
  * \param argc number of command line options
  * \param argv array of options
@@ -140,7 +140,7 @@ static int parse_options(int argc, char *argv[])
                         break;
 
                 case 'n' :
-		  
+
 			ptr = index(optarg, ':');
 
 			if (! ptr) {
@@ -169,7 +169,7 @@ static int parse_options(int argc, char *argv[])
 			}
 
 			tau_port = atoi(ptr);
-		 
+
 			if (! tau_port) {
 				show_usage(argv[0], 0);
 				fprintf(stderr, "\nERROR: when using -n option port number has to be a number greater than zero\n\n");
@@ -239,7 +239,7 @@ int main(int argc, char **argv, char **envp)
 			fprintf(stderr, "\nERROR: <command> must be two ASCII digits\n\n");
 			exit(-1);
 		}
-		
+
 		cmd = raw_buffer[0];
 		dbg("<command>: 0x%X", cmd);
 

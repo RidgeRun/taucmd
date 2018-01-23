@@ -42,7 +42,7 @@ tauHandler tauOpenFromSerial(char *device)
 	/* CS8: 8n1 (8bit,no parity,1 stopbit)
 	 * CLOCAL  : local connection, no modem contol
 	 */
-	ios.c_cflag = CS8 | CLOCAL; 
+	ios.c_cflag = CS8 | CLOCAL;
 	/* Set to 57600 8N1 no flow control */
 	if (cfsetospeed(&ios,B57600) < 0 ) {
 		perror("Unable to set baudrate");
@@ -103,12 +103,12 @@ static tauStatus tauReadChar(tauHandler handler, char *c, int msWait)
 	int fd = tauFd(handler);
 	int len;
 	int ret;
-  
+
 	tv.tv_sec = msWait / 1000;
 	tv.tv_usec = (msWait % 1000) * 1000;
 
 	FD_ZERO(&readfs);
-	FD_SET(fd, &readfs); 
+	FD_SET(fd, &readfs);
 
 	printf(".");
 	fflush(stdout);
@@ -207,7 +207,7 @@ static tauStatus tauReceiveCmd(tauHandler handler, char *buffer, short *bufferCo
 		perror("Unable to receive response header");
 		*bufferCount = 0;
 		return CAM_TIMEOUT_ERROR;
-	} 
+	}
 
 	if (len != TAU_HEADER_SIZE) {
 		/* TODO, check for EAGAIN and read in the rest */
@@ -220,17 +220,17 @@ static tauStatus tauReceiveCmd(tauHandler handler, char *buffer, short *bufferCo
 	sptr = (uint16_t *) &buffer[4];
 	data_len = ntohs(*sptr);
 
-	assert ( * bufferCount >= (TAU_HEADER_SIZE + data_len + 2)); 
+	assert ( * bufferCount >= (TAU_HEADER_SIZE + data_len + 2));
 
 	len = read(handler,&buffer[TAU_HEADER_SIZE],data_len + 2);
 
 	if (len < 0 ) {
-	
+
 		fprintf(stderr,"Unable to receive response data: %d\n", len);
 		perror(NULL);
 		*bufferCount = TAU_HEADER_SIZE;
 		return CAM_TIMEOUT_ERROR;
-	} 
+	}
 
 	if (len != data_len+2) {
 		/* TODO, check for EAGAIN and read in the rest */
@@ -238,7 +238,7 @@ static tauStatus tauReceiveCmd(tauHandler handler, char *buffer, short *bufferCo
 		*bufferCount = TAU_HEADER_SIZE;
 		return CAM_TIMEOUT_ERROR;
 	}
-      
+
 	*bufferCount = TAU_HEADER_SIZE + data_len + 2;
 
 	return CAM_OK;
@@ -312,7 +312,7 @@ static tauStatus tauDecodeResponse(short cmd, char *buffer, short bufferSize, ch
 	}
 
 	sptr = (uint16_t *)&buffer[6];
-    
+
 	if (ntohs(*sptr) != crcCcitt16(buffer,6)) {
 		fprintf(stderr,"Packet received from Tau camera contains header CRC error\n");
 		return CAM_CHECKSUM_ERROR;
@@ -323,7 +323,7 @@ static tauStatus tauDecodeResponse(short cmd, char *buffer, short bufferSize, ch
 	data_len = ntohs(*sptr);
 
 	sptr = (uint16_t *)&buffer[TAU_HEADER_SIZE + data_len];
-    
+
 	if (ntohs(*sptr) != crcCcitt16(buffer,TAU_HEADER_SIZE + data_len)) {
 		fprintf(stderr,"Packet received from Tau camera contains overall packet CRC error\n");
 		return CAM_CHECKSUM_ERROR;
@@ -400,7 +400,7 @@ tauStatus tauDoCmd(tauHandler handler,tauCmd cmd,
 		goto free_rsp;
 	}
 
-free_rsp: 
+free_rsp:
 	free(rsp);
 free_msg:
 	free(msg);

@@ -44,7 +44,7 @@ typedef enum tauCmd tauCmd;
 
 typedef int tauHandler;
 
-/** Opens the communication with a Tau camera over the specified 
+/** Opens the communication with a Tau camera over the specified
  * device.
  * This function takes care of setting the serial port settings to the
  * right configuration
@@ -78,7 +78,7 @@ int tauFd(tauHandler handler);
  * \param output_count on entry if output is not NULL, pointer to the size of the output array, on exit contains amount of valid data in output
  * \returns the status of the camerastatus;
  */
-tauStatus tauDoCmd(tauHandler handler,tauCmd cmd, 
+tauStatus tauDoCmd(tauHandler handler,tauCmd cmd,
 		   char *input, short input_size,
 		   char* output, short *output_count);
 

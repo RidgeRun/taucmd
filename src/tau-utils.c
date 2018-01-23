@@ -117,7 +117,7 @@ int asciiHexToBinary(char *buffer, const int buf_len, char *ascii_hex)
 
 		ptr++;
 	}
-       
+
 	return count;
 }
 
@@ -163,10 +163,10 @@ static void initCrcCcitt16Tab( void ) {
 	}
 
 	crc_tabccitt_init = 1;
-} 
+}
 
 
-/** Returns a new CCITT16 CRC value calcualted using an existing CRC 
+/** Returns a new CCITT16 CRC value calcualted using an existing CRC
  *  value and adding another character to the CRC
  * \param crc existing CCITT16 CRC value
  * \param c character to add to the CRC
