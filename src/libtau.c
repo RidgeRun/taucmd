@@ -30,7 +30,7 @@ tauHandler tauOpenFromSerial(char *device)
 	int fd;
 	struct termios ios;
 
-	fd = open(device, O_RDWR);
+	fd = open(device, O_RDWR| O_NOCTTY);
 	if (fd < 0){
 		perror("Unable to open device");
 		return errno;
@@ -42,9 +42,14 @@ tauHandler tauOpenFromSerial(char *device)
 	/* CS8: 8n1 (8bit,no parity,1 stopbit)
 	 * CLOCAL  : local connection, no modem contol
 	 */
-	ios.c_cflag = CS8 | CLOCAL;
+	ios.c_cflag = CS8 | CLOCAL | CREAD;
+	ios.c_iflag = IGNPAR;
+	ios.c_oflag = 0;
+	ios.c_lflag = 0;
+	tcflush(fd, TCIFLUSH);
+
 	/* Set to 57600 8N1 no flow control */
-	if (cfsetospeed(&ios,B57600) < 0 ) {
+	if (cfsetospeed(&ios, B57600) < 0 ) {
 		perror("Unable to set baudrate");
 		return errno;
 	}
@@ -110,13 +115,8 @@ static tauStatus tauReadChar(tauHandler handler, char *c, int msWait)
 	FD_ZERO(&readfs);
 	FD_SET(fd, &readfs);
 
-	printf(".");
 	fflush(stdout);
-
-
 	ret = select(fd + 1, &readfs, NULL, NULL, &tv);
-
-	printf("post select: 0x%X\n", ret);
 	fflush(stdout);
 
 	if (ret < 0) {
@@ -130,7 +130,7 @@ static tauStatus tauReadChar(tauHandler handler, char *c, int msWait)
 
 	len = read(fd, c, 1);
 	assert(len == 1);
-	fprintf(stderr, "Read: 0x%2.2X\n", c);
+	fprintf(stderr, "Read: 0x%2.2X\n", *c);
 	return CAM_OK;
 }
 
