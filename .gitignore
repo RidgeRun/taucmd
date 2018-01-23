@@ -1,0 +1,17 @@
+*~
+Makefile
+config.h
+config.log
+config.status
+libtool
+src/.deps/
+src/.libs/
+src/Makefile
+src/libtau.la
+src/libtau.lo
+src/libtau.o
+src/tau-utils.o
+src/taucmd
+src/taucmd.o
+stamp-h1
+autom4te.cache
